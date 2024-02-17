@@ -9,7 +9,11 @@ interface AnswerQuestionUseCaseRequest {
 export class AnswerQuestionUseCase {
   execute({ instructorId, questionId, content }: AnswerQuestionUseCaseRequest) {
     // como nao foi passado o id para a resposta ele mesma cria seu id
-    const answer = new Answer(content);
+    const answer = new Answer({
+      authorId: instructorId,
+      content,
+      questionId,
+    });
 
     return answer;
   }
