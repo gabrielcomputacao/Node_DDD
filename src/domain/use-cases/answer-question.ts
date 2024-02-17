@@ -1,4 +1,5 @@
 import { Answer } from "../entities/answer";
+import { AnswersRepository } from "../repositories/answers-repository";
 
 interface AnswerQuestionUseCaseRequest {
   instructorId: string;
@@ -7,13 +8,21 @@ interface AnswerQuestionUseCaseRequest {
 }
 
 export class AnswerQuestionUseCase {
-  execute({ instructorId, questionId, content }: AnswerQuestionUseCaseRequest) {
+  constructor(private answersRepository: AnswersRepository) {}
+
+  async execute({
+    instructorId,
+    questionId,
+    content,
+  }: AnswerQuestionUseCaseRequest) {
     // como nao foi passado o id para a resposta ele mesma cria seu id
     const answer = new Answer({
       authorId: instructorId,
       content,
       questionId,
     });
+
+    await this.answersRepository.create(answer);
 
     return answer;
   }

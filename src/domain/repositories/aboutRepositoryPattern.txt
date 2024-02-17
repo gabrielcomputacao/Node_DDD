@@ -1,0 +1,6 @@
+
+##  Repository Pattern
+
+O padrão repository é como o nosso  codigo vai conectar com a camada de persistencia
+Os repositorios fazem as relacoes entre as camadas externas, como camada de persisitencia, com as camadas internas do nosso codigo (entities,use-cases)
+
