@@ -1,24 +1,29 @@
 import { expect, test } from "vitest";
-import { AnswerQuestionUseCase } from "./answer-question";
-import { Answer } from "@/domain/forum/enterprise/entities/answer";
+
 import { QuestionRepository } from "../repositories/question-repository";
 import { Question } from "../../enterprise/entities/question";
 import { CreateQuestionUseCase } from "./create-question";
+import { InMemoryQuestionsRepository } from "test/repositories/in-memory-question-repository";
 
-const fakeQuestionRepository: QuestionRepository = {
-  create: async (question: Question) => {
-    return;
-  },
-};
+let inMemoryQuestionsRepository: InMemoryQuestionsRepository;
+// system under test
+let sut: CreateQuestionUseCase;
 
-test("create a question", async () => {
-  const createQUestion = new CreateQuestionUseCase(fakeQuestionRepository);
-
-  const { question } = await createQUestion.execute({
-    content: "conteudo da pergunta",
-    title: "teste pergunta",
-    authorId: "1",
+describe("Create Question", () => {
+  beforeEach(() => {
+    inMemoryQuestionsRepository = new InMemoryQuestionsRepository();
+    // o case de uso aceito o inMemoty pois ele implementa a classe QuestionRepository, por isso é possivel passar para o caso de uso
+    sut = new CreateQuestionUseCase(inMemoryQuestionsRepository);
   });
 
-  expect(question.id).toBeTruthy();
+  test("should be able to create a question", async () => {
+    const { question } = await sut.execute({
+      content: "conteudo da pergunta",
+      title: "teste pergunta",
+      authorId: "1",
+    });
+
+    expect(question.id).toBeTruthy();
+    expect(inMemoryQuestionsRepository.items[0].id).toEqual(question.id);
+  });
 });
