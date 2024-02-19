@@ -1,7 +1,7 @@
 export class Slug {
   public value: string;
 
-  constructor(value: string) {
+  private constructor(value: string) {
     this.value = value;
   }
 
@@ -13,6 +13,10 @@ export class Slug {
    * @param text {string}
    *
    */
+
+  static create(slug: string) {
+    return new Slug(slug);
+  }
 
   static createFromText(text: string) {
     // Normalize: padroniza a stirng removendo ou convertendo um caracter para um caracter aceito dentro da convenção que esta dentro da fução
