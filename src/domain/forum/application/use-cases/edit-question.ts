@@ -8,7 +8,9 @@ interface EditQuestionUseCaseRequest {
   title: string;
   content: string;
 }
-interface EditQuestionUseCaseResponse {}
+interface EditQuestionUseCaseResponse {
+  question: Question;
+}
 
 export class EditQuestionUseCase {
   constructor(private questionRepository: QuestionRepository) {}
@@ -37,6 +39,8 @@ export class EditQuestionUseCase {
 
     await this.questionRepository.save(question);
 
-    return {};
+    return {
+      question,
+    };
   }
 }

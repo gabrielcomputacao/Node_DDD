@@ -22,4 +22,11 @@ export class InMemoryAnswersRepository implements AnswersRepository {
   async create(answer: Answer): Promise<void> {
     this.items.push(answer);
   }
+
+  async save(answer: Answer): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === answer.id);
+
+    // o splice deleta itens a partir do indice passado, e nesse caso so foi 1 item deletado a partir do index passado, conta desde o primeiro indice passado
+    this.items[itemIndex] = answer;
+  }
 }
