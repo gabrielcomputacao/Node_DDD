@@ -4,7 +4,7 @@ import { Optional } from "@/core/types/optional";
 
 // ! nâo criar os setters no começo, somente a medida que for precisando deles
 
-interface AnswerProps {
+export interface AnswerProps {
   authorId: UniqueEntityId;
   questionId: UniqueEntityId;
   content: string;
