@@ -36,4 +36,11 @@ export class InMemoryQuestionsRepository implements QuestionRepository {
     // o splice deleta itens a partir do indice passado, e nesse caso so foi 1 item deletado a partir do index passado, conta desde o primeiro indice passado
     this.items.splice(itemIndex, 1);
   }
+
+  async save(question: Question): Promise<void> {
+    const itemIndex = this.items.findIndex((item) => item.id === question.id);
+
+    // o splice deleta itens a partir do indice passado, e nesse caso so foi 1 item deletado a partir do index passado, conta desde o primeiro indice passado
+    this.items[itemIndex] = question;
+  }
 }
