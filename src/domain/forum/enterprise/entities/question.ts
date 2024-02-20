@@ -6,7 +6,7 @@ import dayjs from "dayjs";
 
 // todo: slug é uma frase sem acento sem pontuação que é melhor vista para indexação, o slug tem algumas regras a serem seguidas
 
-interface QuestionProps {
+export interface QuestionProps {
   authorId: UniqueEntityId;
   bestAnswerId?: UniqueEntityId;
   title: string;
