@@ -1,10 +1,9 @@
 import { expect, test } from "vitest";
 
 import { InMemoryQuestionsRepository } from "test/repositories/in-memory-question-repository";
-import { GetQuestionBySlugUseCase } from "./get-question-by-slug";
 
 import { makeQuestion } from "test/factories/make-question";
-import { Slug } from "../../enterprise/entities/value-objects/slug";
+
 import { FetchRecentQuestionsUseCase } from "./fetch-recent-topics";
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository;

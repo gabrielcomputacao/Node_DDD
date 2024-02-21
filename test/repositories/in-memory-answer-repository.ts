@@ -1,3 +1,4 @@
+import { PaginationParams } from "@/core/repositories/pagination-params";
 import { AnswersRepository } from "@/domain/forum/application/repositories/answers-repository";
 import { Answer } from "@/domain/forum/enterprise/entities/answer";
 
@@ -28,5 +29,16 @@ export class InMemoryAnswersRepository implements AnswersRepository {
 
     // o splice deleta itens a partir do indice passado, e nesse caso so foi 1 item deletado a partir do index passado, conta desde o primeiro indice passado
     this.items[itemIndex] = answer;
+  }
+
+  async findManyByQuestionId(
+    questionId: string,
+    { page }: PaginationParams
+  ): Promise<Answer[]> {
+    const answers = this.items
+      .filter((item) => item.questionId.toString() === questionId)
+      .slice((page - 1) * 20, page * 20);
+
+    return answers;
   }
 }
