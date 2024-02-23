@@ -42,7 +42,7 @@ export class AnswerComment extends Entity<AnswerCommentProps> {
     props: Optional<AnswerCommentProps, "createdAt">,
     id?: UniqueEntityId
   ) {
-    // todo -> somente pode ser usado o construtor dentro das classes que instanciam o metodo entity, fora nao sera possivel mais, ai terá que usar o static create
+    // todo -> somente pode ser usado o construtor dentro das classes que instanciam o metodo entity, fora nao sera possivel mais, ai terá que usar o static create que é usado para nao substituir o construtor padrão
     const answerComment = new AnswerComment(
       {
         ...props,
